@@ -30,9 +30,18 @@
 		<![CDATA[
 			  select no, title, contents, reg_date as regDate, category_no as categoryNo
 			    from post
-			   where category_no = #{categoryFirstNo }
+			   where no = #{no }
 			  order by title
 			  limit 1
+		]]>
+	</select>
+	
+	<select id="findPostNo" parameterType="long" resultType="long">
+		<![CDATA[
+			  select no
+  				from post
+ 				where category_no = #{categoryNo }
+ 				limit 1
 		]]>
 	</select>
 	

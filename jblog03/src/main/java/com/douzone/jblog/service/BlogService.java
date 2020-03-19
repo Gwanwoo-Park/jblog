@@ -99,11 +99,17 @@ public class BlogService {
 			map.put("postVo", postRepository.findContents(postNo));
 			map.put("postList", postRepository.findAllMain(categoryNo));
 		} else if(categoryNo != 0L) {
+			Long no = postRepository.findPostNo(categoryNo);
+			System.out.println(no);
+			System.out.println(postRepository.findMainPostContents(no));
+			map.put("postVo", postRepository.findMainPostContents(no));
+			
 			map.put("postList", postRepository.findAllMain(categoryNo));
 		} else {
 			Long categoryFirstNo = categoryRepository.findFirstNo(id);
+			Long no = postRepository.findPostNo(categoryFirstNo);
 			map.put("postList", postRepository.findAllMain(categoryFirstNo));
-			map.put("postVo", postRepository.findMainPostContents(categoryFirstNo));
+			map.put("postVo", postRepository.findMainPostContents(no));
 		}
 		
 		return map;

@@ -31,7 +31,12 @@ public class PostRepository {
 		return sqlSession.selectOne("post.findContents", postNo);
 	}
 
-	public PostVo findMainPostContents(Long categoryFirstNo) {
-		return sqlSession.selectOne("post.findMainPostContents", categoryFirstNo);
+	public PostVo findMainPostContents(Long no) {
+		return sqlSession.selectOne("post.findMainPostContents", no);
+	}
+
+	public Long findPostNo(Long categoryNo) {
+
+		return sqlSession.selectOne("post.findPostNo", categoryNo);
 	}
 }

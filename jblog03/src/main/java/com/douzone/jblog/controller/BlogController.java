@@ -19,6 +19,7 @@ import com.douzone.jblog.service.PostService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
+import com.douzone.security.Auth;
 
 @Controller
 @RequestMapping("/{id:(?!assets).*}")
@@ -83,6 +84,7 @@ public class BlogController {
 		return "redirect:/" + id;
 	}
 
+	@Auth
 	@RequestMapping(value = "/admin/basic", method = RequestMethod.GET)
 	public String blogAdminBasic(@PathVariable("id") String id, Model model) {
 		BlogVo vo = blogService.find(id);
@@ -91,6 +93,7 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}
 
+	@Auth
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
 	public String blogAdminCatogory(@PathVariable("id") String id, Model model) {
 		Map<String, Object> map = new HashMap<>();
@@ -103,6 +106,7 @@ public class BlogController {
 		return "blog/blog-admin-category";
 	}
 
+	@Auth
 	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
 	public String blogAdminCatogory(@PathVariable("id") String id,
 			@RequestParam(value = "name", required = true, defaultValue = "") String name,
@@ -118,6 +122,7 @@ public class BlogController {
 		return "redirect:/" + id + "/admin/category";
 	}
 
+	@Auth
 	@RequestMapping("/{no}/delete")
 	public String categoryDelete(@PathVariable("id") String id, @PathVariable("no") Long no, Model model) {
 
@@ -130,6 +135,7 @@ public class BlogController {
 		return "redirect:/" + id + "/admin/category";
 	}
 
+	@Auth
 	@RequestMapping(value = "/admin/write", method = RequestMethod.GET)
 	public String blogAdminWrite(@PathVariable("id") String id, Model model) {
 
@@ -142,6 +148,7 @@ public class BlogController {
 		return "blog/blog-admin-write";
 	}
 
+	@Auth
 	@RequestMapping(value = "/admin/write", method = RequestMethod.POST)
 	public String blogAdminWriteSuccess(@PathVariable("id") String id,
 			@RequestParam(value = "categoryNo", required = true, defaultValue = "") Long categoryNo,

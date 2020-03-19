@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><a href="${pageContext.request.contextPath}/${id }">${blogVo.title }</a></h1>
+			<h1><a href="${pageContext.request.contextPath}/${blogVo.id }">${blogVo.title }</a></h1>
 			<c:import url="/WEB-INF/views/includes/blog-header.jsp" />
 		</div>
 		<div id="wrapper">
@@ -25,7 +25,7 @@
 				</div>
 				<ul class="blog-list">
 				<c:forEach items='${postList }' var='vo' step='1' varStatus='status'>
-					<li><a href="${pageContext.request.contextPath}/${authUser.id }/${vo.categoryNo }/${vo.no }">${vo.title }</a><span>${vo.regDate }</span></li>
+					<li><a href="${pageContext.request.contextPath}/${blogVo.id }/${vo.categoryNo }/${vo.no }">${vo.title }</a><span>${vo.regDate }</span></li>
 				</c:forEach>
 				</ul>
 			</div>
@@ -41,7 +41,7 @@
 			<h2>카테고리</h2>
 			<ul>
 			<c:forEach items='${categoryList }' var='vo' step='1' varStatus='status'>
-				<li><a href="${pageContext.request.contextPath}/${authUser.id }/${vo.no }">${vo.name }</a></li>
+				<li><a href="${pageContext.request.contextPath}/${blogVo.id }/${vo.no }">${vo.name }</a></li>
 			</c:forEach>
 			</ul>
 		</div>
