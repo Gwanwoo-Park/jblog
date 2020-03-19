@@ -145,7 +145,10 @@ public class BlogController {
 		CategoryVo vo = new CategoryVo();
 		vo.setId(id);
 		vo.setNo(no);
-
+		int countCategory = categoryService.categoryCount(id);
+		int countPost = postService.postCount(no);
+		if(countCategory > 1 || countPost != 0 )
+			return "redirect:/" + id + "/admin/category";
 		categoryService.delete(vo);
 
 		return "redirect:/" + id + "/admin/category";

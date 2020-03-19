@@ -45,4 +45,10 @@
 		]]>
 	</select>
 	
+	<select id="countPost" parameterType="long" resultType="int">
+		<![CDATA[
+			 select count(*) from post where category_no =#{no}
+		]]>
+	</select>
+	
 </mapper>

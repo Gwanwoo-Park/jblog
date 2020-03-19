@@ -43,4 +43,8 @@ public class CategoryRepository {
 	public List<CategoryVo> lookUp() {
 		return sqlSession.selectList("category.lookUp");
 	}
+
+	public int categoryCount(String id) {
+		return sqlSession.selectOne("category.categoryCount", id);
+	}
 }

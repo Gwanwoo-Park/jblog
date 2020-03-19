@@ -58,4 +58,10 @@
 		]]>
 	</delete>
 	
+	<select id="categoryCount" parameterType="string" resultType="int" >
+		<![CDATA[
+			  select count(*) from category where id=#{id}
+		]]>
+	</select>
+	
 </mapper>

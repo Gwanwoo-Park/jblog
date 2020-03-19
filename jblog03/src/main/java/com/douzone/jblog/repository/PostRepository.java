@@ -39,4 +39,8 @@ public class PostRepository {
 
 		return sqlSession.selectOne("post.findPostNo", categoryNo);
 	}
+
+	public int countPost(Long no) {
+		return sqlSession.selectOne("post.countPost", no);
+	}
 }

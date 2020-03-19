@@ -47,4 +47,8 @@ public class CategoryService {
 	public Long findFirstNo(String id) {
 		return categoryRepository.findFirstNo(id);
 	}
+
+	public int categoryCount(String id) {
+		return categoryRepository.categoryCount(id);
+	}
 }

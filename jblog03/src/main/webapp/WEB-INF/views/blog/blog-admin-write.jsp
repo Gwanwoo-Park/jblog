@@ -26,7 +26,14 @@
 			      				<input type="text" size="60" name="title">
 				      			<select name="categoryNo">
 					      			<c:forEach items='${list }' var='vo' step='1' varStatus='status'>
-					      				<option value='${vo.no }'>${vo.name }</option>
+					      				<c:choose>
+					      					<c:when test="${vo.name eq '기타' }">
+					      						<option value='${vo.no }' selected>${vo.name }</option>
+					      					</c:when>
+					      					<c:otherwise>
+					      						<option value='${vo.no }'>${vo.name }</option>
+					      					</c:otherwise>
+					      				</c:choose>
 					      			</c:forEach>
 				      			</select>
 				      		</td>

@@ -30,4 +30,8 @@ public class PostService {
 		
 		return map;
 	}
+
+	public int postCount(Long no) {
+		return postRepository.countPost(no);
+	}
 }
