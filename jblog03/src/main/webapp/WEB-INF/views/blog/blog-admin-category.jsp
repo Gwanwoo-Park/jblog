@@ -34,7 +34,7 @@
 				      			<td>${vo.count }</td>
 				      			<td>${vo.description }</td>
 				      			<td>
-				      			<c:if test="${vo.count == 0 }">
+				      			<c:if test="${vo.count == 0 && deleteFalse != 1}">
 				      				<a href="${pageContext.servletContext.contextPath }/${authUser.id }/${vo.no }/delete"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
 				      			</c:if>
 				      			</td>

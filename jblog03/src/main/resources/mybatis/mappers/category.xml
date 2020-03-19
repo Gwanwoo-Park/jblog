@@ -19,6 +19,7 @@
 						group by b.category_no) b
   				on a.no = b.no
   				where a.id=#{id }
+  			order by name
 		]]>
 	</select>
 	

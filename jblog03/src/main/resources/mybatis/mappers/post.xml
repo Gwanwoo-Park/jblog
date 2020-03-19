@@ -11,7 +11,7 @@
 	
 	<select id="findAllMain" parameterType="long" resultType="postvo">
 		<![CDATA[
-			  select no, title, contents, reg_date as regDate, category_no as categoryNo
+			  select no, title, contents, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate, category_no as categoryNo
 			    from post
 			   where category_no = #{categoryFirstNo }
 			order by title
@@ -20,7 +20,7 @@
 	
 	<select id="findContents" parameterType="long" resultType="postvo">
 		<![CDATA[
-			  select no, title, contents, reg_date as regDate, category_no as categoryNo
+			  select no, title, contents, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate, category_no as categoryNo
 			    from post
 			   where no = #{no }
 		]]>
@@ -28,7 +28,7 @@
 	
 	<select id="findMainPostContents" parameterType="long" resultType="postvo">
 		<![CDATA[
-			  select no, title, contents, reg_date as regDate, category_no as categoryNo
+			  select no, title, contents, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate, category_no as categoryNo
 			    from post
 			   where no = #{no }
 			  order by title

@@ -53,6 +53,11 @@ public class BlogController {
 		
 		Map<String, Object> map = blogService.getAll(id, categoryNo, postNo);
 		
+		BlogVo blogVo = (BlogVo) map.get("blogVo");
+		if(blogVo == null) {
+			return "error/404";
+		}
+		
 		model.addAllAttributes(map);
 		
 		return "blog/blog-main";
@@ -98,6 +103,17 @@ public class BlogController {
 	public String blogAdminCatogory(@PathVariable("id") String id, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map = categoryService.findAll(id);
+		
+		int listSize = (int) map.get("listCount");
+		int deleteFalse = 0;
+		if(listSize == 1) {
+			deleteFalse = 1;
+			map.put("deleteFalse", deleteFalse);
+		} else {
+			deleteFalse = 0;
+			map.put("deleteFalse", deleteFalse);
+		}
+		
 		BlogVo vo = blogService.find(id);
 		map.put("blogVo", vo);
 		
