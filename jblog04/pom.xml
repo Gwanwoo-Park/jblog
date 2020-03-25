@@ -7,10 +7,10 @@
 		<artifactId>jblog</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
-	<artifactId>jblog03</artifactId>
+	<artifactId>jblog04</artifactId>
+
 	<packaging>war</packaging>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -18,7 +18,7 @@
 		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 		<logback.version>1.1.1</logback.version>
 	</properties>
-	
+
 	<dependencies>
 
 		<!-- Spring Core, Context, AOP -->
@@ -55,14 +55,14 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- spring aspect -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -75,6 +75,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
 		</dependency>
+
 
 		<!-- MyBatis -->
 		<dependency>
@@ -151,10 +152,10 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
-		<finalName>jblog03</finalName>
+		<finalName>jblog04</finalName>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
@@ -194,12 +195,11 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<url>http://192.168.1.102:8080/manager/text</url>
-					<path>/jblog03</path>
+					<path>/jblog04</path>
 					<username>admin</username>
 					<password>admin</password>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
 </project>
