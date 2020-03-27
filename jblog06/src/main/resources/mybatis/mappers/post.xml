@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+
+	<insert id="insert" parameterType="postvo">
+		<![CDATA[
+			insert into post
+	 			 values (null, #{title }, #{contents }, now(), #{categoryNo })
+		]]>
+	</insert>
+	
+	<select id="findAllMain" parameterType="long" resultType="postvo">
+		<![CDATA[
+			  select no, title, contents, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate, category_no as categoryNo
+			    from post
+			   where category_no = #{categoryFirstNo }
+			order by title
+		]]>
+	</select>
+	
+	<select id="findContents" parameterType="long" resultType="postvo">
+		<![CDATA[
+			  select no, title, contents, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate, category_no as categoryNo
+			    from post
+			   where no = #{no }
+		]]>
+	</select>
+	
+	<select id="findMainPostContents" parameterType="long" resultType="postvo">
+		<![CDATA[
+			  select no, title, contents, date_format(reg_date,'%Y-%m-%d %h:%i:%s') as regDate, category_no as categoryNo
+			    from post
+			   where no = #{no }
+			  order by title
+			  limit 1
+		]]>
+	</select>
+	
+	<select id="findPostNo" parameterType="long" resultType="long">
+		<![CDATA[
+			  select no
+  				from post
+ 				where category_no = #{categoryNo }
+ 				limit 1
+		]]>
+	</select>
+	
+	<select id="countPost" parameterType="long" resultType="int">
+		<![CDATA[
+			 select count(*) from post where category_no =#{no}
+		]]>
+	</select>
+	
+</mapper>
