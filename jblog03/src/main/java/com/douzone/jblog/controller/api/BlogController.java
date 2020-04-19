@@ -3,6 +3,7 @@ package com.douzone.jblog.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,6 @@ public class BlogController {
 	@GetMapping("/spa/category")
 	public JsonResult list(@PathVariable("id") String id) {
 		List<CategoryVo> list = categoryService.findAllJson(id);
-		System.out.println(list);
 		return JsonResult.success(list);
 	}
 	
@@ -35,6 +35,14 @@ public class BlogController {
 		System.out.println(vo);
 		vo.setId(id);
 		categoryService.insertCategory(vo);
+		return JsonResult.success(vo);
+	}
+	
+	@DeleteMapping("/spa/delete")
+	public JsonResult delete(
+			@PathVariable("id") String id,
+			@RequestBody CategoryVo vo) {
+		categoryService.delete(vo);
 		return JsonResult.success(vo);
 	}
 }

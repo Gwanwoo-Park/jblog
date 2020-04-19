@@ -2,7 +2,7 @@
 	for(var i = 0; i < data.length; i++) {
 		var vo = data[i];
 %>
-		<tr>
+		<tr data-no="<%=vo.no%>">
   			<td><%=i+1%></td>
   			<td><%=vo.name%></td>
 			<td><%=vo.count%></td>
@@ -12,8 +12,8 @@
             		삭제 불가
    
       			<% } else if( vo.count == 0 ){ %>
-            		<a data-no="<%=vo.no%>" href="" >
-            		<img src="<%=contextPath %>"></a>
+            		<a data-no="<%=vo.no%>" href="">
+            		<img id="delete" src="<%=contextPath %>"></a>
       			<% } %>
   			</td>
   		</tr>

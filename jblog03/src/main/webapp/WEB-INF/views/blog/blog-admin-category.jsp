@@ -116,14 +116,12 @@ $(function(){
 				var contextPath = '${pageContext.request.contextPath }/assets/images/delete.jpg';
 				response.data.contextPath= contextPath;
 				
+				console.log(response.data);
 				var html = listItemTemplate.render(response.data);
-				console.log(html);
 				$('.admin-cat tr:last').after(html);
 				
 				// form reset
 				$("#add-form")[0].reset();
-				
-				console.log('여기까지 옴?');
 			},
 			error: function(xhr, status, e){
 				console.error(status + ":" + e);
@@ -131,6 +129,39 @@ $(function(){
 		});
 	});
 	
+	$(document).on('click','.admin-cat tr td a img', function(event){
+		event.preventDefault();
+		
+		var vo = {};
+		vo.no = $(this).parent().data('no');
+		
+		$.ajax({
+			url: '${pageContext.request.contextPath}/${authUser.id }/spa/delete',
+			async: true,
+			type: 'delete',
+			dataType: 'json',
+			contentType: 'application/json',
+			data: JSON.stringify(vo),
+			success: function(response){
+				
+				if(response.result != "success"){
+					console.error(response.message);
+					return;
+				}
+				console.log(response.data.no);
+				console.log($('.admin-cat tr[164]'));
+				$(".admin-cat tr td a[data-no=" + response.data.no + "]").parent()
+				.parent().remove();
+				
+				
+	            return;
+				
+			},
+			error: function(xhr, status, e){
+				console.error(status + ":" + e);
+			}
+		});
+	});
 });
 </script>
 </head>
