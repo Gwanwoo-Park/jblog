@@ -120,6 +120,8 @@ $(function(){
 				var html = listItemTemplate.render(response.data);
 				$('.admin-cat tr:last').after(html);
 				
+				location.reload();
+				
 				// form reset
 				$("#add-form")[0].reset();
 			},
@@ -153,6 +155,7 @@ $(function(){
 				$(".admin-cat tr td a[data-no=" + response.data.no + "]").parent()
 				.parent().remove();
 				
+				location.reload();
 				
 	            return;
 				
@@ -182,7 +185,7 @@ $(function(){
 							<th>설명</th>
 							<th>삭제</th>
 						</tr>
-					
+						
 				      	
 			      		<!-- 
 				      	<c:forEach items='${list }' var='vo' step='1' varStatus='status'>
