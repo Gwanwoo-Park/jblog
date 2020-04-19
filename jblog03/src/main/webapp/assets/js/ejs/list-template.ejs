@@ -1,0 +1,22 @@
+<%
+	for(var i = 0; i < data.length; i++) {
+		var vo = data[i];
+%>
+		<tr>
+  			<td><%=i+1%></td>
+  			<td><%=vo.name%></td>
+			<td><%=vo.count%></td>
+			<td><%=vo.description%></td>
+  			<td>
+  				<%   if( vo.count != 0 ){ %>
+            		삭제 불가
+   
+      			<% } else if( vo.count == 0 ){ %>
+            		<a data-no="<%=vo.no%>" href="" >
+            		<img src="<%=contextPath %>"></a>
+      			<% } %>
+  			</td>
+  		</tr>
+<%
+	}
+%>

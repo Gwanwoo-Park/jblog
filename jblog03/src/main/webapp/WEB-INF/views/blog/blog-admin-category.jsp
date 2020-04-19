@@ -8,6 +8,131 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/ejs/ejs.js"></script>
+<script>
+var listItemTemplate = new EJS({
+	url: "${pageContext.request.contextPath }/assets/js/ejs/list-item-template.ejs"
+});
+var listTemplate = new EJS({
+	url: "${pageContext.request.contextPath }/assets/js/ejs/list-template.ejs"
+});
+
+var messageBox = function(title, message, callback){
+	$("#dialog-message p").text(message);
+	$("#dialog-message")
+		.attr("title", title)
+		.dialog({
+			modal: true,
+			buttons: {
+				"확인": function() {
+					$(this).dialog( "close" );
+		        }
+			},
+			close: callback
+		});
+};
+
+var fetchList = function(){
+	$.ajax({
+		url: '${pageContext.request.contextPath }/${authUser.id }/spa/category',
+		async: true,
+		type: 'get',
+		dataType: 'json',
+		data: '',
+		success: function(response){
+			if(response.result != "success"){
+				console.error(response.message);
+				return;
+			}
+			
+			var contextPath = '${pageContext.request.contextPath}/assets/images/delete.jpg';
+			var deleteLink = '${pageContext.servletContext.contextPath }/${authUser.id }/';
+			response.contextPath= contextPath;
+			
+			var html = listTemplate.render(response);
+			$(".admin-cat").append(html);
+		},
+		error: function(xhr, status, e){
+			console.error(status + ":" + e);
+		}
+	});	
+}
+
+$(function(){
+	fetchList();
+	
+	$('a').click(function() {
+		console.log($(this).data('no'));
+	});
+	
+	$('#add-form').submit(function(event){
+		event.preventDefault();
+		
+		var vo = {};
+		vo.name = $("#name").val();
+		console.log(vo.name);
+		if(vo.name == ''){
+			messageBox("카테고리 추가하기", "카테고리명은 필수 항목 입니다.", function(){
+				$("#category").focus();
+			});
+			return;
+		}
+		
+		vo.description = $("#description").val();
+		
+		console.log(vo.description);
+		
+		if(vo.password == ''){
+			messageBox("카테고리 추가하기", "설명은 필수 항목 입니다.", function(){
+				$("#description").focus();
+			});
+			return;
+		}
+		
+		$.ajax({
+			url: '${pageContext.request.contextPath}/${authUser.id }/admin/category',
+			async: true,
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			data: JSON.stringify(vo),
+			success: function(response){
+				console.log('dddd');
+				
+				if(response.result != "success"){
+					console.error(response.message);
+					return;
+				}
+				// rendering
+				// render(response.data, true);
+				
+				var k = $('.admin-cat tr').last().index();
+				var num = k + 1;
+				response.data.num = num;
+				
+				var contextPath = '${pageContext.request.contextPath }/assets/images/delete.jpg';
+				response.data.contextPath= contextPath;
+				
+				var html = listItemTemplate.render(response.data);
+				console.log(html);
+				$('.admin-cat tr:last').after(html);
+				
+				// form reset
+				$("#add-form")[0].reset();
+				
+				console.log('여기까지 옴?');
+			},
+			error: function(xhr, status, e){
+				console.error(status + ":" + e);
+			}
+		});
+	});
+	
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -19,14 +144,16 @@
 			<div id="content" class="full-screen">
 				<c:import url="/WEB-INF/views/includes/admin-header.jsp" />
 			      	<table class="admin-cat">
-			      		<tr>
-			      			<th>번호</th>
-			      			<th>카테고리명</th>
-			      			<th>포스트 수</th>
-			      			<th>설명</th>
-			      			<th>삭제</th>
-			      		</tr>
-			      		
+			      		<tr id='menu-title'>
+							<th>번호</th>
+							<th>카테고리명</th>
+							<th>포스트 수</th>
+							<th>설명</th>
+							<th>삭제</th>
+						</tr>
+					
+				      	
+			      		<!-- 
 				      	<c:forEach items='${list }' var='vo' step='1' varStatus='status'>
 				      		<tr>
 				      			<td>${listCount-status.index }</td>
@@ -40,25 +167,31 @@
 				      			</td>
 				      		</tr>
 				      	</c:forEach>
+				      	-->
+				
 					</table>
       	
+				      	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.request.contextPath}/${authUser.id }/admin/category" method="post">
+      			<form id="add-form" action="" method="post">
 			      	<table id="admin-cat-add">
 			      		<tr>
 			      			<td class="t">카테고리명</td>
-			      			<td><input type="text" name="name"></td>
+			      			<td><input id='name' type="text" name="name"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">설명</td>
-			      			<td><input type="text" name="description"></td>
+			      			<td><input id='description' type="text" name="description"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="s">&nbsp;</td>
-			      			<td><input type="submit" value="카테고리 추가"></td>
+			      			<td><input id='add' type="submit" value="카테고리 추가"></td>
 			      		</tr>
 			      	</table>
 		      	</form>
+			</div>
+			<div id="dialog-message" title="" style="display:none">
+  				<p></p>
 			</div>
 		</div>
 		<div id="footer">

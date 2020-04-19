@@ -44,10 +44,10 @@ public class CategoryVo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 	@Override
 	public String toString() {
 		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", regDate=" + regDate
-				+ ", id=" + id + "]";
+				+ ", id=" + id + ", count=" + count + "]";
 	}
+	
 }

@@ -48,6 +48,10 @@
 			insert into category
 				 values (null, #{name }, #{description }, now(), #{id })
 		]]>
+		
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+		select last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<delete id="delete" parameterType="categoryvo">
