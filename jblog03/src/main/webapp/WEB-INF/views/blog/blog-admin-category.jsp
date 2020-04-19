@@ -117,10 +117,14 @@ $(function(){
 				response.data.contextPath= contextPath;
 				
 				console.log(response.data);
-				var html = listItemTemplate.render(response.data);
-				$('.admin-cat tr:last').after(html);
+				// var html = listItemTemplate.render(response.data);
+				// $('.admin-cat tr:last').after(html);
 				
-				location.reload();
+				// location.reload();
+				
+				
+				$('.admin-cat tr td').remove();
+				fetchList();
 				
 				// form reset
 				$("#add-form")[0].reset();
@@ -152,10 +156,13 @@ $(function(){
 				}
 				console.log(response.data.no);
 				console.log($('.admin-cat tr[164]'));
-				$(".admin-cat tr td a[data-no=" + response.data.no + "]").parent()
-				.parent().remove();
+				// $(".admin-cat tr td a[data-no=" + response.data.no + "]").parent()
+				// .parent().remove();
 				
-				location.reload();
+				$('.admin-cat tr td').remove();
+				fetchList();
+				
+				// location.reload();
 				
 	            return;
 				
