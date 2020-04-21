@@ -6,8 +6,8 @@
 
 <div id="admin-header">
 	<ul class="admin-menu">
-		<li class="selected"><a href="${pageContext.request.contextPath}/${blogVo.id }/admin/basic">기본설정</a></li>
-		<li><a href="${pageContext.request.contextPath}/${blogVo.id }/admin/category">카테고리</a></li>
-		<li><a href="${pageContext.request.contextPath}/${blogVo.id }/admin/write">글작성</a></li>
+		<li class="selected"><a href="${pageContext.request.contextPath}/${authUser.id }/admin/basic">기본설정</a></li>
+		<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/category">카테고리</a></li>
+		<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/write">글작성</a></li>
 	</ul>
 </div>

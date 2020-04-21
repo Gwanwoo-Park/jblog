@@ -101,41 +101,10 @@ public class BlogController {
 	@Auth
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
 	public String blogAdminCatogory(@PathVariable("id") String id, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map = categoryService.findAll(id);
-		
-		int listSize = (int) map.get("listCount");
-		int deleteFalse = 0;
-		if(listSize == 1) {
-			deleteFalse = 1;
-			map.put("deleteFalse", deleteFalse);
-		} else {
-			deleteFalse = 0;
-			map.put("deleteFalse", deleteFalse);
-		}
-		
 		BlogVo vo = blogService.find(id);
-		map.put("blogVo", vo);
+		model.addAttribute("blogVo", vo);
 		
-		model.addAllAttributes(map);
-
 		return "blog/blog-admin-category";
-	}
-
-	@Auth
-	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
-	public String blogAdminCatogory(@PathVariable("id") String id,
-			@RequestParam(value = "name", required = true, defaultValue = "") String name,
-			@RequestParam(value = "description", required = true, defaultValue = "") String description, Model model) {
-
-		CategoryVo vo = new CategoryVo();
-		vo.setId(id);
-		vo.setName(name);
-		vo.setDescription(description);
-
-		categoryService.insertCategory(vo);
-
-		return "redirect:/" + id + "/admin/category";
 	}
 
 	@Auth
@@ -183,5 +152,4 @@ public class BlogController {
 
 		return "redirect:/" + id;
 	}
-
 }

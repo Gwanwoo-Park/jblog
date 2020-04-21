@@ -47,4 +47,8 @@ public class CategoryRepository {
 	public int categoryCount(String id) {
 		return sqlSession.selectOne("category.categoryCount", id);
 	}
+
+	public List<CategoryVo> findAllJson(String id) {
+		return sqlSession.selectList("category.findAll", id);
+	}
 }

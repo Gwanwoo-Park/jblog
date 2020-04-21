@@ -51,4 +51,8 @@ public class CategoryService {
 	public int categoryCount(String id) {
 		return categoryRepository.categoryCount(id);
 	}
+
+	public List<CategoryVo> findAllJson(String id) {
+		return categoryRepository.findAllJson(id);
+	}
 }
