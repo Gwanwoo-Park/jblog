@@ -100,7 +100,6 @@ $(function(){
 			contentType: 'application/json',
 			data: JSON.stringify(vo),
 			success: function(response){
-				console.log('dddd');
 				
 				if(response.result != "success"){
 					console.error(response.message);
@@ -116,12 +115,10 @@ $(function(){
 				var contextPath = '${pageContext.request.contextPath }/assets/images/delete.jpg';
 				response.data.contextPath= contextPath;
 				
-				console.log(response.data);
 				// var html = listItemTemplate.render(response.data);
 				// $('.admin-cat tr:last').after(html);
 				
 				// location.reload();
-				
 				
 				$('.admin-cat tr td').remove();
 				fetchList();

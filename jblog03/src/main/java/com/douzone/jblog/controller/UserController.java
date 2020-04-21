@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.UserVo;
+import com.douzone.security.AuthUser;
 
 @Controller
 public class UserController {
@@ -20,7 +21,11 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login() {
+	public String login(@AuthUser UserVo authUser) {
+		if(authUser != null) {
+			return "redirect:/";
+		}
+		
 		return "user/login";
 	}
 	

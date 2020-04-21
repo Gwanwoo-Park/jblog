@@ -100,7 +100,10 @@ public class BlogController {
 
 	@Auth
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
-	public String blogAdminCatogory(@PathVariable("id") String id) {
+	public String blogAdminCatogory(@PathVariable("id") String id, Model model) {
+		BlogVo vo = blogService.find(id);
+		model.addAttribute("blogVo", vo);
+		
 		return "blog/blog-admin-category";
 	}
 

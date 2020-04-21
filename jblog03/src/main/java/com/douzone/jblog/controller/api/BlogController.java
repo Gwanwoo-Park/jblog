@@ -32,7 +32,6 @@ public class BlogController {
 	public JsonResult add(
 			@PathVariable("id") String id,
 			@RequestBody CategoryVo vo) {
-		System.out.println(vo);
 		vo.setId(id);
 		categoryService.insertCategory(vo);
 		return JsonResult.success(vo);
